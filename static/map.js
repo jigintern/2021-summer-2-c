@@ -1,4 +1,6 @@
-function initMap() {
+import { CSV } from "https://js.sabae.cc/CSV.js";
+
+window.init = async () => {
     var sabae = { lat: 35.943056, lng: 136.188889 };
     var map = new google.maps.Map(document.getElementById('map'),
         {
@@ -26,6 +28,9 @@ function initMap() {
     else {
         alert("Err！");
     }
+
+    const data = CSV.toJSON(await CSV.fetch("sabaesafe.csv"));
+    console.log(data);
 
     let array = [[35.94243193, 136.1859739],
     [35.953064, 136.184382],
