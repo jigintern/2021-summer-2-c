@@ -2,8 +2,14 @@
 <html>
 <link href="./upload.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="js/upload.js"></script>
-<label class="upload-label">
-	写真をフォルダから選択してください
-	<input type="file">
-  </label>
+
+  <div x-data="app">
+	<div x-show="showUpload">
+	  <img :src="preview">
+	  写真選択
+	  <input id="inputFile" @change="fileSelected" type="file" required>
+	  <button @click="upload()" :class="buttonStyle">アップロード</button>
+	</div>
+  </div>
+
 </html>
