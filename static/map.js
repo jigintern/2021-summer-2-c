@@ -2,6 +2,7 @@ import { CSV } from "https://js.sabae.cc/CSV.js";
 
 window.init = async () => {
     var sabae = { lat: 35.943056, lng: 136.188889 };
+    var kari={lat: 35.942432, lng: 136.18598};
     var map = new google.maps.Map(document.getElementById('map'),
         {
             zoom: 15,
@@ -10,8 +11,6 @@ window.init = async () => {
     var marker = new google.maps.Marker({
         position: sabae,
         map: map,
-<<<<<<< Updated upstream
-=======
         icon: {
             fillColor: "#0033FF",
             fillOpacity: 0.8,
@@ -25,7 +24,23 @@ window.init = async () => {
             color: '#FFFFFF',
             fontSize: '20px'
         }
->>>>>>> Stashed changes
+    });
+    var karimarker = new google.maps.Marker({
+        position: kari,
+        map: map,
+        icon: {
+            fillColor: "#FF2A00",
+            fillOpacity: 0.8,
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 16,
+            strokeColor: "#0C0100",
+            strokeWeight: 1.0
+        },
+        label: {
+            text: '仮',
+            color: '#FFFFFF',
+            fontSize: '20px'
+        }
     });
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -35,9 +50,6 @@ window.init = async () => {
             };
             var marker = new google.maps.Marker({
                 position: pos,
-<<<<<<< Updated upstream
-                map: map
-=======
                 map: map,
                 icon: {
                     fillColor: "#FF2A00",
@@ -47,7 +59,6 @@ window.init = async () => {
                     strokeColor: "#0C0100",
                     strokeWeight: 1.0
                 },
->>>>>>> Stashed changes
             });
             map.setZoom(15);
             map.setCenter(pos);
@@ -60,10 +71,6 @@ window.init = async () => {
     const data = CSV.toJSON(await CSV.fetch("sabaesafe.csv"));
     console.log(data);
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     for (const d of data) {
         var X = Number(d["経度"]);
         console.log("X", X);
@@ -74,13 +81,30 @@ window.init = async () => {
             position: sabaesafe,
             map: map,
         });
-        google.maps.event.addListener(safemarker, 'click', () => {
-<<<<<<< Updated upstream
-            location.href = "setumei/setumei.html?kouzui="+d["洪水"]+"&doseki="+d["崖崩れ、土石流及び地滑り"]+"&jishin="+d["地震"]+"&kaji="+d["大規模な火事"]+"&hanran="+d["内水氾濫"];
-          });
-=======
-            location.href = "setumei/setumei.html?kouzui=" + d["洪水"] + "&doseki=" + d["崖崩れ、土石流及び地滑り"] + "&jishin=" + d["地震"] + "&kaji=" + d["大規模な火事"] + "&hanran=" + d["内水氾濫"];
-        });
->>>>>>> Stashed changes
+
+        var uploadFlg = false;
+        var dis;
+        //dis = Math.sqrt((position.coords.latitude - X) ^ 2 + (position.coords.longitude - Y) ^ 2);
+        dis = distance(35.942432, 136.18598, Y, X); //km
+        if (dis <= 0.01) {
+            uploadFlg = true;
+        }
+
+        console.log(uploadFlg);
+
+        if (uploadFlg) {
+            google.maps.event.addListener(safemarker, 'click', () => {
+                location.href = "setumei/setumei.html?kouzui=" + d["洪水"] + "&doseki=" + d["崖崩れ、土石流及び地滑り"] + "&jishin=" + d["地震"] + "&kaji=" + d["大規模な火事"] + "&hanran=" + d["内水氾濫"];
+            });
+        }
     }
+}
+
+const R = Math.PI / 180;
+function distance(lat1, lng1, lat2, lng2) {
+    lat1 *= R;
+    lng1 *= R;
+    lat2 *= R;
+    lng2 *= R;
+    return 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2));
 }
