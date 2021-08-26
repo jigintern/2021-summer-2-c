@@ -26,3 +26,15 @@ function convertArray(data) {
 
 getCsvData('sabaesafe.csv');
 convertArray('sabaesafe.csv');
+
+
+//円範囲内判定
+/*
+34.7037896,135.1942838
+
+
+boolean uploadFlg=false;
+int dis;
+dis=sqrt((position.coords.latitude-X)^2)+(position.coords.longitude-Y)^2);
+if()
+*/
