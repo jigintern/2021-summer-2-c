@@ -32,18 +32,19 @@ window.init = async () => {
     const data = CSV.toJSON(await CSV.fetch("sabaesafe.csv"));
     console.log(data);
 
-    let array = [[35.94243193, 136.1859739],
-    [35.953064, 136.184382],
-    [35.939483, 136.199131],
-    [35.971811, 136.178243]];
 
-    for (let n = 0; n < 4; n++) {
-        var X = array[n][0];
-        var Y = array[n][1];
-        var sabaesafe = { lat: X, lng: Y };
+    for (const d of data) {
+        var X = Number(d["経度"]);
+        console.log("X", X);
+        var Y = Number(d["緯度"]);
+        console.log("Y", Y);
+        var sabaesafe = { lat: Y, lng: X };
         var safemarker = new google.maps.Marker({
             position: sabaesafe,
             map: map,
         });
+        google.maps.event.addListener(safemarker, 'click', () => {
+            location.href = "setumei/setumei.html?kouzui="+d["洪水"]+"&doseki="+d["崖崩れ、土石流及び地滑り"]+"&jishin="+d["地震"]+"&kaji="+d["大規模な火事"]+"&hanran="+d["内水氾濫"];
+          });
     }
 }
