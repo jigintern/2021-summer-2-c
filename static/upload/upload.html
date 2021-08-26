@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html>
 <link href="./upload.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="js/upload.js"></script>
 
-  <div x-data="app">
-	<div x-show="showUpload">
-	  <img :src="preview">
+  <div>
+	<div>
+	  <img id="preview">
 	  写真選択
-	  <input id="inputFile" @change="fileSelected" type="file" onchange="previewImage(this);">
-	  <button @click="upload()" :class="buttonStyle">アップロード</button>
+	  <input id="inputFile" type="file" onchange="previewImage(this);">
+	  <button onclick="upload()">アップロード</button>
 	</div>
   </div>
 
-
   <p>
   Preview:<br>
-  <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
+  <img id="preview1" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
   </p>
-  <script>
-  function previewImage(obj)
-  {
+  <script type="module">
+	  import { ImageUploader } from "https://ninja03.github.io/denokun/lib/ImageUploader.js"
+  
+	  window.previewImage = (obj) => {
 	  var fileReader = new FileReader();
 	  fileReader.onload = (function() {
 		  document.getElementById('preview').src = fileReader.result;
 	  });
 	  fileReader.readAsDataURL(obj.files[0]);
-  }
+  };
+
+   // アップロードする
+   window.upload  = () => {
+   const f = inputFile.files[0]
+   let up = new ImageUploader("/data/")
+    // 最大幅1200px、最大ファイルサイズ1メガバイト
+    up.setFile(f, 1200, 1024 * 1024)
+    up.onload = async url => {
+    }
+  };
+
   </script>
 	
   <div id="back">
-	  <button id="exit" onclick="location.htef='./index.html'">マップに戻る</button>
+	  <button id="exit" onclick="location.href='../index.html'">マップに戻る</button>
   </div>
 
 </html>
