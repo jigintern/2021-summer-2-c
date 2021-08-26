@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            スタンプギャラリー
+        </title>
+        <link rel = "stylesheet" href = "list.css">
+    </head>
+
+    <body>
+        <h1　class = "title">
+            スタンプギャラリー
+        </h1>
+        <div id="stamps">
+        </div>
+        
+        <script>
+            let stamp = localStorage.stamp;
+                if (stamp == undefined) {
+                    stamp = 0;
+                }
+                stamp = Number(stamp);
+
+            for (let i = 1; i <= stamp; i++) {
+                stamps.innerHTML += `
+              <img src = "../Stamps/${i}.jpg">`;
+          }
+        </script>
+
+        <div id="back">
+            <button id="exit" onclick="location.href='../index.html'">マップに戻る</button>
+        </div>
+        
+    </body>
+</html>

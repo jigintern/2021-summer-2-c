@@ -33,6 +33,13 @@
     // 最大幅1200px、最大ファイルサイズ1メガバイト
     up.setFile(f, 1200, 1024 * 1024)
     up.onload = async url => {
+      
+      let stamp = localStorage.stamp;
+        if (stamp == undefined) {
+          stamp = 0;
+        }
+        localStorage.stamp = Number(stamp) + 1;
+        location.href = "../stamplist/list.html"
     }
   };
 
