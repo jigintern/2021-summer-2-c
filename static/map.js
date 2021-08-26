@@ -81,10 +81,8 @@ window.init = async () => {
             position: sabaesafe,
             map: map,
         });
-
         var uploadFlg = false;
         var dis;
-        //dis = Math.sqrt((position.coords.latitude - X) ^ 2 + (position.coords.longitude - Y) ^ 2);
         dis = distance(35.942432, 136.18598, Y, X); //km
         if (dis <= 0.01) {
             uploadFlg = true;
