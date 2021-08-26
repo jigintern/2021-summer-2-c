@@ -10,6 +10,14 @@ window.init = async () => {
     var marker = new google.maps.Marker({
         position: sabae,
         map: map,
+        icon: {
+            fillColor: "#FF2A00",                //塗り潰し色
+            fillOpacity: 0.8,                    //塗り潰し透過率
+            path: google.maps.SymbolPath.CIRCLE, //円を指定
+            scale: 16,                           //円のサイズ
+            strokeColor: "#0C0100",              //枠の色
+            strokeWeight: 1.0                    //枠の透過率
+        },
     });
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -19,7 +27,15 @@ window.init = async () => {
             };
             var marker = new google.maps.Marker({
                 position: pos,
-                map: map
+                map: map,
+                icon: {
+                    fillColor: "#0033FF",                //塗り潰し色
+                    fillOpacity: 0.8,                    //塗り潰し透過率
+                    path: google.maps.SymbolPath.CIRCLE, //円を指定
+                    scale: 16,                           //円のサイズ
+                    strokeColor: "#00FF2E",              //枠の色
+                    strokeWeight: 1.0                    //枠の透過率
+                },
             });
             map.setZoom(15);
             map.setCenter(pos);
