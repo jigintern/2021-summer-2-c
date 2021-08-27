@@ -1,8 +1,15 @@
 import { CSV } from "https://js.sabae.cc/CSV.js";
 
 window.init = async () => {
+
+    var kariX = 136.18598;
+    var kariY = 35.942432;
+
+    console.log(kariY);
+    console.log(kariX);
+
     var sabae = { lat: 35.943056, lng: 136.188889 };
-    var kari={lat: 35.942432, lng: 136.18598};
+    var kari = { lat: kariY, lng: kariX };
     var map = new google.maps.Map(document.getElementById('map'),
         {
             zoom: 15,
@@ -28,6 +35,7 @@ window.init = async () => {
     var karimarker = new google.maps.Marker({
         position: kari,
         map: map,
+        draggable: true,
         icon: {
             fillColor: "#FF2A00",
             fillOpacity: 0.8,
@@ -41,6 +49,12 @@ window.init = async () => {
             color: '#FFFFFF',
             fontSize: '20px'
         }
+    });
+    google.maps.event.addListener(karimarker, 'dragend', function (ev) {
+        document.getElementById('latitude').value = ev.latLng.lat();
+        document.getElementById('longitude').value = ev.latLng.lng();
+        kariY = ev.latLng.lat();
+        kariX = ev.latLng.lng();
     });
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -84,19 +98,20 @@ window.init = async () => {
 
         var uploadFlg = false;
         var dis;
-        //dis = Math.sqrt((position.coords.latitude - X) ^ 2 + (position.coords.longitude - Y) ^ 2);
-        dis = distance(35.942432, 136.18598, Y, X); //km
-        if (dis <= 0.01) {
-            uploadFlg = true;
-        }
-
-        console.log(uploadFlg);
-
-        if (uploadFlg) {
-            google.maps.event.addListener(safemarker, 'click', () => {
-                location.href = "setumei/setumei.html?kouzui=" + d["洪水"] + "&doseki=" + d["崖崩れ、土石流及び地滑り"] + "&jishin=" + d["地震"] + "&kaji=" + d["大規模な火事"] + "&hanran=" + d["内水氾濫"];
-            });
-        }
+        google.maps.event.addListener(safemarker, 'click', ((Y2, X2) => {
+            return () => {
+                dis = distance(kariY, kariX, Y2, X2); //km
+                if (dis <= 0.01) {
+                    uploadFlg = true;
+                }
+                console.log(uploadFlg);
+                console.log(X);
+                console.log(Y);
+                if (uploadFlg) {
+                    location.href = "setumei/setumei.html?kouzui=" + d["洪水"] + "&doseki=" + d["崖崩れ、土石流及び地滑り"] + "&jishin=" + d["地震"] + "&kaji=" + d["大規模な火事"] + "&hanran=" + d["内水氾濫"];
+                }
+            };
+        })(Y, X));
     }
 }
 
