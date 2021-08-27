@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
-	<link rel="stylesheet" href="sakura.css" type="text/css">
-
+	<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
   <div>
 	<div>
-	  <img id="preview">
 	  写真選択
 	  <input id="inputFile" type="file" onchange="previewImage(this);">
 	  <button onclick="upload()">アップロード</button>
@@ -13,6 +11,7 @@
 
   <p>
   Preview:<br>
+  <img id="preview">
   <img id="preview1" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
   </p>
   <script type="module">
@@ -44,10 +43,11 @@
   };
 
   </script>
-  <script type="text/javascript" src="upload.js"></script>
 
   <div id="back">
-	  <button id="exit" onclick="location.href='../index.html'">マップに戻る</button>
+	  <button id="exit" onclick="location.href='../index.html'">
+		マップに戻る
+	</button>
   </div>
 
 </html>
