@@ -95,9 +95,9 @@ window.init = async () => {
             position: sabaesafe,
             map: map,
         });
-
         var uploadFlg = false;
         var dis;
+
         google.maps.event.addListener(safemarker, 'click', ((Y2, X2) => {
             return () => {
                 dis = distance(kariY, kariX, Y2, X2); //km
