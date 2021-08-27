@@ -4,5 +4,5 @@ if (photo == undefined) {
 }
 photo = Number(photo);
 for (let i = 1; i <= photo; i++) {
-    photo.innerHTML += `<img src = ".../data/${i}.png">`;
+    photo.innerHTML += `<img src = ".../data/${i}.jpg">`;
 }
