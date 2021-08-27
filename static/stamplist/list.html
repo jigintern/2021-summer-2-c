@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
     <head>
         <meta charset="UTF-8">
         <title>
             スタンプギャラリー
         </title>
-        <link rel = "stylesheet" href = "list.css">
+        <link rel="stylesheet" type="text/css" href="list.css" />
     </head>
 
     <body>
@@ -25,8 +26,13 @@
             for (let i = 1; i <= stamp; i++) {
                 stamps.innerHTML += `
               <img src = "../Stamps/${i}.jpg">`;
-          }
+            }
         </script>
+        <br>
+
+        <div id = "number">
+
+        </div>
 
         <div id="back">
             <button id="exit" onclick="location.href='../index.html'">マップに戻る</button>
