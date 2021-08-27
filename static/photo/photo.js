@@ -1,8 +1,8 @@
-let stamp = localStorage.stamp;
-if (stamp == undefined) {
-    stamp = 0;
+let photo = localStorage.photo;
+if (photo == undefined) {
+    photo = 0;
 }
-stamp = Number(stamp);
-for (let i = 1; i <= stamp; i++) {
-    stamps.innerHTML += `<img src = ".../data/${i}.jpg">`;
+photo = Number(photo);
+for (let i = 1; i <= photo; i++) {
+    photo.innerHTML += `<img src = ".../data/${i}.jpg">`;
 }
