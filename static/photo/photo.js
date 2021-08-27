@@ -1,3 +1,8 @@
-for await (const d of Deno.readDir("./data")) {
-    console.log(d.name);
-  }
+let stamp = localStorage.stamp;
+if (stamp == undefined) {
+    stamp = 0;
+}
+stamp = Number(stamp);
+for (let i = 1; i <= stamp; i++) {
+    stamps.innerHTML += `<img src = ".../data/${i}.jpg">`;
+}
